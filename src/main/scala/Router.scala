@@ -7,9 +7,15 @@ object Router extends Directives {
       get {
         complete("all tutorials")
       }
-    } ~ path(Segment) { id =>
-      get {
-        complete(s"tutorial $id")
+    } ~ pathPrefix(Segment) { id =>
+      pathEnd {
+        get {
+          complete(s"tutorial $id")
+        }
+      } ~ path("comments") {
+        get {
+          complete(s"comments for the $id tutorial")
+        }
       }
     }
   }

@@ -18,5 +18,12 @@ class RouterSpec extends WordSpec with Matchers with ScalatestRouteTest {
         responseAs[String] shouldBe "tutorial hello-world"
       }
     }
+
+    "list all comments of a given tutorial" in {
+      Get("/tutorials/hello-world/comments") ~> Router.route ~> check {
+        status shouldBe StatusCodes.OK
+        responseAs[String] shouldBe "comments for the hello-world tutorial"
+      }
+    }
   }
 }
