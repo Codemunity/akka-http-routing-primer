@@ -25,5 +25,12 @@ class RouterSpec extends WordSpec with Matchers with ScalatestRouteTest {
         responseAs[String] shouldBe "comments for the hello-world tutorial"
       }
     }
+
+    "add comments to a tutorial" in {
+      Post("/tutorials/hello-world/comments", "new comment") ~> Router.route ~> check {
+        status shouldBe StatusCodes.OK
+        responseAs[String] shouldBe "added the comment 'new comment' to the hello-world tutorial"
+      }
+    }
   }
 }

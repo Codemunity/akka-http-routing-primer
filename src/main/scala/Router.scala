@@ -15,6 +15,10 @@ object Router extends Directives {
       } ~ path("comments") {
         get {
           complete(s"comments for the $id tutorial")
+        } ~ post {
+          entity(as[String]) { comment =>
+            complete(s"added the comment '$comment' to the $id tutorial")
+          }
         }
       }
     }
